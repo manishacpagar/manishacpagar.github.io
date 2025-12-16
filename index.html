@@ -695,18 +695,23 @@
             text-align: center;
             display: none;
             font-weight: 500;
+            transition: var(--transition);
+            opacity: 0;
+        }
+
+        .form-status.show {
+            opacity: 1;
+            display: block;
         }
 
         .form-status.success {
             background: #d4edda;
             color: #155724;
-            display: block;
         }
 
         .form-status.error {
             background: #f8d7da;
             color: #721c24;
-            display: block;
         }
 
         /* ===== FOOTER ===== */
@@ -1289,11 +1294,6 @@
     </footer>
 
     <script>
-        // SIMPLE FIX: Let the browser handle smooth scrolling naturally
-        // Remove all JavaScript that interferes with anchor links
-        
-        // Only keep these essential functions:
-        
         // Mobile Navigation Toggle
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
@@ -1349,20 +1349,97 @@
             });
         });
         
-        // Contact Form Submission
+       
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
+           '
+            const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw2QjwnGrLiUDiJMb6VK8aiZI5AOzppMwlgTAxnS5Ey3kLzM4zJz4PDvMHa8BUlojdD/exec';
+            
+            contactForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
-                const formData = new FormData(this);
                 const formStatus = document.getElementById('formStatus');
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.textContent;
                 
-                // Simulate form submission success for demo
-                formStatus.textContent = 'Thank you! Your message has been sent successfully.';
-                formStatus.className = 'form-status success';
-                contactForm.reset();
+                // Show loading state
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+                formStatus.className = 'form-status';
+                formStatus.textContent = '';
+                
+                // Collect form data
+                const formData = {
+                    name: document.getElementById('name').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    phone: document.getElementById('phone').value.trim(),
+                    subject: document.getElementById('subject').value.trim(),
+                    message: document.getElementById('message').value.trim()
+                };
+                
+                // Basic validation
+                if (!formData.name || !formData.email || !formData.message) {
+                    showFormStatus('Please fill in all required fields', 'error');
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                    return;
+                }
+                
+                try {
+                    // Send to Google Apps Script Web App
+                    const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        // Success
+                        showFormStatus('✓ ' + result.message, 'success');
+                        contactForm.reset();
+                        
+                    } else {
+                        // Error from server
+                        throw new Error(result.message || 'Server error occurred');
+                    }
+                    
+                } catch (error) {
+                    // Error handling
+                    console.error('Form submission error:', error);
+                    
+                    // Check if it's a network error
+                    if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                        showFormStatus('✗ Network error. Please check your connection.', 'error');
+                    } else {
+                        showFormStatus('✗ Error: ' + error.message, 'error');
+                    }
+                    
+                } finally {
+                    // Restore button state
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                }
             });
+            
+            // Helper function to show form status
+            function showFormStatus(message, type) {
+                const formStatus = document.getElementById('formStatus');
+                formStatus.textContent = message;
+                formStatus.className = 'form-status ' + type + ' show';
+                
+                // Auto-hide message after 5 seconds
+                setTimeout(() => {
+                    formStatus.classList.remove('show');
+                    setTimeout(() => {
+                        formStatus.textContent = '';
+                        formStatus.className = 'form-status';
+                    }, 300);
+                }, 5000);
+            }
         }
         
         // Add shadow to header on scroll
@@ -1375,19 +1452,8 @@
             }
         });
         
-        // DEBUG: Simple button test - REMOVE THIS IN PRODUCTION
+        // Debug logging (can be removed in production)
         console.log("Page loaded successfully!");
-        console.log("Contact button:", document.getElementById('contactBtn'));
-        console.log("Research button:", document.getElementById('researchBtn'));
-        
-        // Test if buttons are clickable
-        document.getElementById('contactBtn')?.addEventListener('click', function() {
-            console.log("Contact button clicked!");
-        });
-        
-        document.getElementById('researchBtn')?.addEventListener('click', function() {
-            console.log("Research button clicked!");
-        });
     </script>
 </body>
 </html>
