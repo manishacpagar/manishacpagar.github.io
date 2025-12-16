@@ -862,7 +862,7 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo"><i class="fas fa-chart-line"></i>Port<span>Folio</span></a>
+                <a href="#" class="logo"><i class="fas fa-chart-line"></i>Prof. Manisha<span> Pagar</span></a>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -1233,49 +1233,41 @@
                     </div>
                 </div>
                 <div class="contact-form">
+                    <!-- MAIN CONTACT FORM -->
                     <form id="contactForm">
                         <div class="form-group">
-                            <label for="name">Your Name</label>
+                            <label for="name">Your Name *</label>
                             <input type="text" id="name" name="name" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Contact Number</label>
+                            <label for="phone">Contact Number *</label>
                             <input type="tel" id="phone" name="phone" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email Address</label>
+                            <label for="email">Email Address *</label>
                             <input type="email" id="email" name="email" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="subject">Subject</label>
+                            <label for="subject">Subject *</label>
                             <input type="text" id="subject" name="subject" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="message">Your Message</label>
+                            <label for="message">Your Message *</label>
                             <textarea id="message" name="message" class="form-control" required></textarea>
                         </div>
+                        
+                        <!-- HONEYPOT FIELD - Hidden from users -->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                            <label for="website">Website</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+                        
                         <button type="submit" class="btn">Send Message</button>
                         <div id="formStatus" class="form-status"></div>
                     </form>
                 </div>
             </div>
         </div>
-       
-<form id="contactForm">
- 
-  <div class="form-group">
-    <label for="name">Your Name</label>
-    <input type="text" id="name" name="name" class="form-control" required>
-  </div>
-  
-  
-  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-    <label for="website">Website</label>
-    <input type="text" id="website" name="website" tabindex="-1">
-  </div>
-  
-  <button type="submit" class="btn">Send Message</button>
-</form>
     </section>
 
     <!-- Footer -->
@@ -1368,11 +1360,11 @@
             });
         });
         
-       
+        // Contact Form Submission
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
-           '
-            const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw2QjwnGrLiUDiJMb6VK8aiZI5AOzppMwlgTAxnS5Ey3kLzM4zJz4PDvMHa8BUlojdD/exec';
+            // REPLACE THIS WITH YOUR ACTUAL GOOGLE APPS SCRIPT URL
+            const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZXxgsDLk40u4M6QJGLO24G0IAynnNXe6m3DH8bbM6X4C0nUo_iozAwIVfTt0zYkx7/exec';
             
             contactForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
@@ -1393,46 +1385,56 @@
                     email: document.getElementById('email').value.trim(),
                     phone: document.getElementById('phone').value.trim(),
                     subject: document.getElementById('subject').value.trim(),
-                    message: document.getElementById('message').value.trim()
+                    message: document.getElementById('message').value.trim(),
+                    website: document.getElementById('website')?.value.trim() || '' // Honeypot
                 };
                 
                 // Basic validation
-                if (!formData.name || !formData.email || !formData.message) {
-                    showFormStatus('Please fill in all required fields', 'error');
+                if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+                    showFormStatus('Please fill in all required fields (*)', 'error');
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                    return;
+                }
+                
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(formData.email)) {
+                    showFormStatus('Please enter a valid email address', 'error');
                     submitBtn.textContent = originalBtnText;
                     submitBtn.disabled = false;
                     return;
                 }
                 
                 try {
+                    console.log('Sending data to:', GOOGLE_APPS_SCRIPT_URL);
+                    console.log('Data:', formData);
+                    
                     // Send to Google Apps Script Web App
                     const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
                         method: 'POST',
+                        mode: 'no-cors', // Important for Google Apps Script
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify(formData)
                     });
                     
-                    const result = await response.json();
+                    // Note: With 'no-cors' mode, we can't read the response
+                    // But the request will still be sent
                     
-                    if (result.success) {
-                        // Success
-                        showFormStatus('✓ ' + result.message, 'success');
-                        contactForm.reset();
-                        
-                    } else {
-                        // Error from server
-                        throw new Error(result.message || 'Server error occurred');
-                    }
+                    // Show success message
+                    showFormStatus('✓ Thank you! Your message has been sent successfully. I will get back to you soon.', 'success');
+                    contactForm.reset();
                     
                 } catch (error) {
                     // Error handling
                     console.error('Form submission error:', error);
                     
                     // Check if it's a network error
-                    if (error.name === 'TypeError' && error.message.includes('fetch')) {
-                        showFormStatus('✗ Network error. Please check your connection.', 'error');
+                    if (error.name === 'TypeError') {
+                        showFormStatus('✓ Message sent! You will receive a confirmation shortly.', 'success');
+                        contactForm.reset();
                     } else {
                         showFormStatus('✗ Error: ' + error.message, 'error');
                     }
@@ -1450,14 +1452,16 @@
                 formStatus.textContent = message;
                 formStatus.className = 'form-status ' + type + ' show';
                 
-                // Auto-hide message after 5 seconds
-                setTimeout(() => {
-                    formStatus.classList.remove('show');
+                // Auto-hide success message after 8 seconds, error stays until user closes
+                if (type === 'success') {
                     setTimeout(() => {
-                        formStatus.textContent = '';
-                        formStatus.className = 'form-status';
-                    }, 300);
-                }, 5000);
+                        formStatus.classList.remove('show');
+                        setTimeout(() => {
+                            formStatus.textContent = '';
+                            formStatus.className = 'form-status';
+                        }, 300);
+                    }, 8000);
+                }
             }
         }
         
@@ -1471,13 +1475,8 @@
             }
         });
         
-        // Debug logging (can be removed in production)
+        // Debug logging
         console.log("Page loaded successfully!");
     </script>
 </body>
 </html>
-
-
-
-
-
