@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prof. Manisha C. Pagar | Finance Professor & Researcher</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== VARIABLES ===== */
+        :root {
+            --primary: #1a3a5f;
+            --secondary: #d4af37;
+            --accent: #2e8b57;
+            --finance-green: #006400;
+            --finance-blue: #005b96;
+            --light: #f8f9fa;
+            --dark: #0a1929;
+            --text: #2c3e50;
+            --text-light: #6c757d;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --gradient: linear-gradient(135deg, var(--primary), var(--finance-blue));
+        }
+
+        /* ===== BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .logo i {
+            margin-right: 8px;
+            color: var(--finance-green);
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('assets/finance-pattern.png');
+            opacity: 0.05;
+            top: 0;
+            left: 0;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero-text h2 {
+            font-size: 1.6rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .hero-btns .btn {
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-img {
+            width: 100%;
+            max-width: 450px;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border: 5px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .personal-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .info-item i {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* ===== EDUCATION SECTION ===== */
+        .education {
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+        }
+
+        .education-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .education-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .education-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .education-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .education-table tr:hover {
+            background: #e9ecef;
+        }
+
+        /* ===== EXPERIENCE SECTION ===== */
+        .experience-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            background: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .tab-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .experience-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            border-left: 4px solid var(--secondary);
+            transition: var(--transition);
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .experience-card h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .experience-card .date {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+            background: rgba(46, 139, 87, 0.1);
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .experience-card ul {
+            margin-top: 15px;
+        }
+
+        .experience-card li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .experience-card li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* ===== RESEARCH SECTION ===== */
+        .research {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+        }
+
+        .research .section-title h2 {
+            color: white;
+        }
+
+        .research .section-title h2::after {
+            background: var(--secondary);
+        }
+
+        .research-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .research-tab {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            color: white;
+        }
+
+        .research-tab.active {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .research-content {
+            display: none;
+        }
+
+        .research-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .publication-list {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .publication-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: var(--transition);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .publication-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .publication-item h4 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .publication-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        /* ===== SKILLS SECTION ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .skill-category h3 i {
+            margin-right: 10px;
+            color: var(--finance-green);
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: #e9ecef;
+            color: var(--text);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .contact-item i {
+            color: var(--secondary);
+            margin-right: 15px;
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-status {
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+            font-weight: 500;
+        }
+
+        .form-status.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+
+        .form-status.error {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE STYLES ===== */
+        @media (max-width: 992px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-btns {
+                justify-content: center;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-img {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 0;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 50px;
+                transition: var(--transition);
+                box-shadow: var(--shadow);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-text h2 {
+                font-size: 1.4rem;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .personal-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .education-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo"><i class="fas fa-chart-line"></i>Prof. Manisha<span> Pagar</span></a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Prof. Manisha Chandrakant Pagar</h1>
+                    <h2>Finance Professor & Researcher</h2>
+                    <p>Ph.D. (Organizational Management) Pursuing | MBA (Financial Management) | B.Tech. (Agricultural Engineering)</p>
+                    <p>9+ years of experience in Management Education with expertise in Financial Management, Taxation, and Research</p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn" id="contactBtn">Get In Touch</a>
+                        <a href="#research" class="btn btn-outline" id="researchBtn">View Research</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <!-- REPLACE THE IMAGE PATH BELOW WITH YOUR OWN IMAGE -->
+                    <img src="assets/MP Profile.jpg" alt="Prof. Manisha Pagar" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <p>Experienced Finance Professor with a passion for education and research</p>
+            </div>
+            <div class="about-content">
+                <div class="about-img">
+                    <!-- REPLACE THE IMAGE PATH BELOW WITH YOUR OWN IMAGE -->
+                    <img src="assets/Profile.jpg" alt="Prof. Manisha Pagar">
+                </div>
+                <div class="about-text">
+                    <h3>Finance Academic & Researcher</h3>
+                    <p>A result-oriented and value-added professional with 9+ years of quality experience in Management Education as a faculty member. Seeking opportunities in a team environment to utilize my skills and abilities in a sector that offers professional growth & opportunities to continuously learn and develop new perspectives.</p>
+                    
+                    <div class="personal-info">
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>mcpagar@gmail.com</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <span>9561514672</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Nashik, Maharashtra</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Ph.D. (Pursuing) - SPPU</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="btn">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section education" id="education">
+        <div class="container">
+            <div class="section-title">
+                <h2>Education</h2>
+                <p>My academic qualifications and credentials</p>
+            </div>
+            <table class="education-table">
+                <thead>
+                    <tr>
+                        <th>Examination</th>
+                        <th>University</th>
+                        <th>College/School</th>
+                        <th>Percentage</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ph.D. (Organizational Management)</td>
+                        <td>SPPU</td>
+                        <td>MET's Institute of Management, BKC Adgaon</td>
+                        <td>Pursuing</td>
+                        <td>2022 - Present</td>
+                    </tr>
+                    <tr>
+                        <td>M.B.A. (Financial Management)</td>
+                        <td>SPPU</td>
+                        <td>SND COE, Babhulgaon, Yeola</td>
+                        <td>65.93%</td>
+                        <td>2019</td>
+                    </tr>
+                    <tr>
+                        <td>B.Tech. (Agricultural Engineering)</td>
+                        <td>MPKV, Rahuri</td>
+                        <td>Dr. ASCAE, Rahuri</td>
+                        <td>80.30%</td>
+                        <td>2006</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section experience" id="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Work Experience</h2>
+                <p>My professional journey in academia and industry</p>
+            </div>
+            
+            <div class="experience-tabs">
+                <button class="tab-btn active" data-tab="academia">Academia</button>
+                <button class="tab-btn" data-tab="industry">Industry</button>
+            </div>
+            
+            <div class="tab-content active" id="academia">
+                <div class="experience-card">
+                    <h3>Assistant Professor</h3>
+                    <h4>Sandip Institute of Technology and Research Centre, Nashik</h4>
+                    <span class="date">29th August 2020 - Till Date</span>
+                    <ul>
+                        <li>Teaching UG and PG courses in Management with specialization in Financial Management</li>
+                        <li>Institute Website Coordinator, Admission Coordinator, and Exam Coordinator</li>
+                        <li>Member of NBA, NAAC and Autonomy Coordinating team</li>
+                        <li>Editorship of book and Management Fest Coordinator</li>
+                        <li>Member of Women's Grievance Cell and Class Teacher of MBA II year</li>
+                        <li>Deliver teaching and assessment activities including lectures, seminars, tutorials for UG and PG courses</li>
+                    </ul>
+                </div>
+                <div class="experience-card">
+                    <h3>Junior Research Assistant</h3>
+                    <h4>K.K.Wagh College of Agricultural Engg. & Tech., Nashik</h4>
+                    <span class="date">1st Jan 2008 - 16th Dec 2010</span>
+                    <ul>
+                        <li>Supported research activities in agricultural engineering and technology</li>
+                        <li>Contributed to various projects and studies in the field</li>
+                        <li>Assisted in data collection, analysis and reporting</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="industry">
+                <div class="experience-card">
+                    <h3>Agricultural Supervisor</h3>
+                    <h4>Krishi Tantra Vidyalay, Babhulgaon</h4>
+                    <span class="date">1st Sept 2006 - 31st Dec 2008</span>
+                    <ul>
+                        <li>Supervised agricultural activities and operations</li>
+                        <li>Provided guidance on modern farming techniques and practices</li>
+                        <li>Managed field operations and coordinated with farming community</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section class="section research" id="research">
+        <div class="container">
+            <div class="section-title">
+                <h2>Research & Publications</h2>
+                <p>My contributions to academic research and knowledge</p>
+            </div>
+            
+            <div class="research-tabs">
+                <button class="research-tab active" data-tab="publications">Research Publications</button>
+                <button class="research-tab" data-tab="books">Book Chapters</button>
+                <button class="research-tab" data-tab="seminars">Seminars & Conferences</button>
+            </div>
+            
+            <div class="research-content active" id="publications">
+                <div class="publication-list">
+                    <div class="publication-item">
+                        <h4>Tax Savings Strategies Among Salaried Individuals</h4>
+                        <p>JUNI KHYAT, UGC Care Group I Listed Journal, December 2020</p>
+                    </div>
+                    <div class="publication-item">
+                        <h4>Vertical Farming: A Viable Alternate To Traditional Farming</h4>
+                        <p>JUNI KHYAT, UGC Care Group I Listed Journal, December 2020</p>
+                    </div>
+                    <div class="publication-item">
+                        <h4>An Overview Of Indian Defence Industry With Respect To SWOT Analysis</h4>
+                        <p>JUNI KHYAT, UGC Care Group I Listed Journal, December 2020</p>
+                    </div>
+                    <div class="publication-item">
+                        <h4>Outcome Based Education in Management: A Key To Excellence</h4>
+                        <p>CnR's International Journal of Social & Scientific Research</p>
+                    </div>
+                    <div class="publication-item">
+                        <h4>Role Of Artificial Intelligence In Tourism And Hospitality Management</h4>
+                        <p>Scopus Indexed Journal - BOLETÍN DE LITERATURA ORAL, 2023</p>
+                    </div>
+                    <div class="publication-item">
+                        <h4>Reshaping The Future Of MICE Tourism Post-Covid-19: Challenges And Opportunities</h4>
+                        <p>ABDC Journal - European Economic Letters, 2023</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="research-content" id="books">
+                <div class="publication-list">
+                    <div class="publication-item">
+                        <h4>The Role And Relevance Of Social Media Marketing In Indian Banking Sector</h4>
+                        <p>Book: MARKETING IN 2021</p>
+                    </div>
+                    <div class="publication-item">
+                        <h4>Outline Of Green Marketing Practices In Indian Banking Sector</h4>
+                        <p>Book: MARKETING IN 2021</p>
+                    </div>
+                    <div class="publication-item">
+                        <h4>Agriculture And Allied Sector Entrepreneurial Opportunities In India</h4>
+                        <p>Book: Emerging Trends in Commerce And Management: Volume-2</p>
+                    </div>
+                    <div class="publication-item">
+                        <h4>Impact Of COVID-19 On Indian Economy And Ways To Reboot The Economy</h4>
+                        <p>Book: Emerging Trends in Commerce And Management: Volume-2</p>
+                    </div>
+                    <div class="publication-item">
+                        <h4>Study of leadership styles and its impact on various business functions</h4>
+                        <p>Book: Research approaches in Multidisciplinary Subjects Vol-3</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="research-content" id="seminars">
+                <div class="publication-list">
+                    <div class="publication-item">
+                        <h4>International Conference on Ignite: Empowering Innovation and Leadership for Thriving Start-ups</h4>
+                        <p>Presented paper on "Agile Change Management: Navigating Uncertainty and Complexity" - November 2023</p>
+                    </div>
+                    <div class="publication-item">
+                        <h4>Various Faculty Development Programs</h4>
+                        <p>Attended 40+ FDPs, Workshops, and Seminars on topics including Equity Research, Case Study Methodology, Taxation, Blockchain, and more</p>
+                    </div>
+                    <div class="publication-item">
+                        <h4>Association of Indian Management Schools (AIMS)</h4>
+                        <p>Regular participant in knowledge sharing sessions on Accreditation, Future of Work, Organizational Transformation, and more</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Skills & Expertise</h2>
+                <p>My professional capabilities and areas of specialization</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-book"></i> Subjects Taught</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Managerial Economics</span>
+                        <span class="skill-tag">Digital Business</span>
+                        <span class="skill-tag">Personal Financial Planning</span>
+                        <span class="skill-tag">Direct Taxation</span>
+                        <span class="skill-tag">Indirect Taxation</span>
+                        <span class="skill-tag">RABM</span>
+                        <span class="skill-tag">Financial Management</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-chalkboard-teacher"></i> Teaching Skills</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Lesson Planning</span>
+                        <span class="skill-tag">Student Needs Assessment</span>
+                        <span class="skill-tag">Academic Research</span>
+                        <span class="skill-tag">Student Research Guidance</span>
+                        <span class="skill-tag">Diverse Groups Presentations</span>
+                        <span class="skill-tag">Classroom Management</span>
+                        <span class="skill-tag">Audio-Visual Aid Implementation</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-tasks"></i> Administrative Roles</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Institute Website Coordinator</span>
+                        <span class="skill-tag">Admission Coordinator</span>
+                        <span class="skill-tag">Exam Coordinator</span>
+                        <span class="skill-tag">Event Coordinator</span>
+                        <span class="skill-tag">News Coordinator</span>
+                        <span class="skill-tag">Social Media Coordinator</span>
+                        <span class="skill-tag">NBA/NAAC Coordination</span>
+                        <span class="skill-tag">Women's Grievance Cell</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-award"></i> Awards & Memberships</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Best Tutor Award - Sandipotsav 2023</span>
+                        <span class="skill-tag">Member - International Association of Business Management</span>
+                        <span class="skill-tag">Life Member - Green ThinkerZ Society</span>
+                        <span class="skill-tag">Associate Editor - Contemporary Research</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Me</h2>
+                <p>Get in touch for academic collaborations or inquiries</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Address</h4>
+                                <p>Panchavati, Nashik-422003</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>mcpagar@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>9561514672</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <!-- UPDATE SOCIAL MEDIA LINKS BELOW -->
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-researchgate"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-google-scholar"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Contact Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                        <div id="formStatus" class="form-status"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Prof. Manisha C. Pagar</h3>
+                    <p>Finance Professor & Researcher with expertise in Financial Management, Taxation, and Academic Research. 9+ years of experience in management education.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#research">Research</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> 9561514672</li>
+                        <li><i class="fas fa-envelope"></i> mcpagar@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Nashik, Maharashtra</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Prof. Manisha C. Pagar. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // SIMPLE FIX: Let the browser handle smooth scrolling naturally
+        // Remove all JavaScript that interferes with anchor links
+        
+        // Only keep these essential functions:
+        
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Experience Tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Research Tabs
+        const researchTabs = document.querySelectorAll('.research-tab');
+        const researchContents = document.querySelectorAll('.research-content');
+        
+        researchTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                researchTabs.forEach(t => t.classList.remove('active'));
+                researchContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const formStatus = document.getElementById('formStatus');
+                
+                // Simulate form submission success for demo
+                formStatus.textContent = 'Thank you! Your message has been sent successfully.';
+                formStatus.className = 'form-status success';
+                contactForm.reset();
+            });
+        }
+        
+        // Add shadow to header on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if(window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+        
+        // DEBUG: Simple button test - REMOVE THIS IN PRODUCTION
+        console.log("Page loaded successfully!");
+        console.log("Contact button:", document.getElementById('contactBtn'));
+        console.log("Research button:", document.getElementById('researchBtn'));
+        
+        // Test if buttons are clickable
+        document.getElementById('contactBtn')?.addEventListener('click', function() {
+            console.log("Contact button clicked!");
+        });
+        
+        document.getElementById('researchBtn')?.addEventListener('click', function() {
+            console.log("Research button clicked!");
+        });
+    </script>
+</body>
+</html>
